@@ -21,7 +21,6 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
 
   @override
   void initState() {
-    
     super.initState();
   }
 
@@ -29,27 +28,26 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   void didChangeDependencies() {
     if (!_loadedInitData) {
       final routeArgs =
-        ModalRoute.of(context).settings.arguments as Map<String, String>;
-    categoryTitle = routeArgs['title'];
-    final categoryId = routeArgs['id'];
-    displayMeals = widget.availableMeals.where((meal) {
-      return meal.categories.contains(categoryId);
-    }).toList();
-    _loadedInitData = true;
+          ModalRoute.of(context).settings.arguments as Map<String, String>;
+      categoryTitle = routeArgs['title'];
+      final categoryId = routeArgs['id'];
+      displayMeals = widget.availableMeals.where((meal) {
+        return meal.categories.contains(categoryId);
+      }).toList();
+      _loadedInitData = true;
     }
-    
+
     super.didChangeDependencies();
   }
 
-  void _removeMeal(String mealId) {
-    setState(() {
-      displayMeals.removeWhere((meal) => meal.id == mealId);
-    });
-  }
+  // void _removeMeal(String mealId) {
+  //   setState(() {
+  //     displayMeals.removeWhere((meal) => meal.id == mealId);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         title: Text(categoryTitle),
@@ -63,7 +61,6 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
             duration: displayMeals[index].duration,
             affordability: displayMeals[index].affordability,
             complexity: displayMeals[index].complexity,
-            removeItem: _removeMeal,
           );
         },
         itemCount: displayMeals.length,
